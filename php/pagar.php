@@ -21,14 +21,16 @@
     // Para tipo venta: 0 es contado | 1 es credito
     $sql = "INSERT INTO factura_cab (documento, tipo_doc, cliente, monto_total, fecha, tipo_venta) values ('$documento','$tipo_doc', '$cliente', $monto, $fecha,0)";
 
-    //$res1 = $conexion->query($sql);
-    //$idFacturaCab = $conexion->insert_id;
+    $res1 = $conexion->query($sql);
+    $idFacturaCab = $conexion->insert_id;
     $sqlDetalle = "INSERT INTO factura_det (cabecera_id, cantidad, precio_unit, producto_id, total_producto)
     values ";
     $sqlTmp = "";
     for ($i=0; $i < sizeof($productos); $i++) { 
         $sqlTmp .= "($idFacturaCab,{$cantidads[$i]},{$precios[$i]},
         {$productos[$i]},{$monto_productos[$i]}),";
+        $sqlActualizarStock = "UPDATE productos SET cantidad = cantidad - {$cantidads[$i]} where id = {$productos[$i]}";
+        $conexion->query($sqlActualizarStock);
 
     }
     $sqlTmp = substr($sqlTmp,0,-1);

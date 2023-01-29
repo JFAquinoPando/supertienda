@@ -143,6 +143,9 @@ function serialize (data) {
                 ).then(
                     respuesta => {
                         console.log("Hola a todos, soy la respuesta: ", respuesta);
+                        if (respuesta.respuesta === "pagado") {
+                            eliminarElemento("superTiendaCliente")
+                        }
                     }
                 )
         })
