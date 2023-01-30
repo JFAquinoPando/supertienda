@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
-    <script src="./js/persistencia.js"></script>
+    <script src="./js/persistencia.js"></script> 
 </head>
 <body>
     <form action="" id="miFactura">
@@ -143,6 +143,9 @@ function serialize (data) {
                 ).then(
                     respuesta => {
                         console.log("Hola a todos, soy la respuesta: ", respuesta);
+                        if (respuesta.respuesta === "pagado") {
+                            eliminarElemento("superTiendaCliente")
+                        }
                     }
                 )
         })
